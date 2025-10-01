@@ -1,7 +1,21 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+// Importa o novo componente Rodapé
+import FooterHC from './FooterHC'; 
 
-const Loading: React.FC = () => {
-  return <div className="flex items-center justify-center h-screen">Carregando...</div>;
-};
+// ... (HeaderHC continua o mesmo) ...
+const HeaderHC: React.FC = () => (
+    // ... código do Header ...
+);
 
-export default Loading;
+export const LayoutHC: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+    // CRUCIAL: Adiciona 'flex flex-col' para forçar o footer para baixo
+    <div className="min-h-screen bg-hc-fundo flex flex-col"> 
+        <HeaderHC />
+        {/* Adiciona 'flex-grow' para que o conteúdo preencha o espaço disponível */}
+        <main className="container mx-auto py-10 px-4 flex-grow"> 
+            {children}
+        </main>
+        <FooterHC /> {/* O Rodapé é integrado aqui */}
+    </div>
+);
