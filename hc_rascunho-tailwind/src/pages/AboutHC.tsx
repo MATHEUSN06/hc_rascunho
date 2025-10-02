@@ -1,78 +1,68 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-// Opcional: Componente interno para destacar missões/valores (Modularidade)
-const DestaqueMissao: React.FC<{ titulo: string, texto: string, icone: string }> = ({ titulo, texto, icone }) => (
-    <div className="bg-white p-6 rounded-xl shadow-lg border-t-4 border-hc-secundaria">
-        <div className="text-3xl text-hc-secundaria mb-3">{icone}</div>
-        <h3 className="text-xl font-semibold text-hc-principal mb-2">{titulo}</h3>
-        <p className="text-gray-600 text-sm">{texto}</p>
-    </div>
+// --- DEFINIÇÃO DO HEADER E FOOTER REPETIDA ---
+
+const HeaderHC: React.FC = () => (
+    <header className="bg-hc-principal text-gray-100 p-4 shadow-xl">
+        <nav className="container mx-auto flex justify-between items-center">
+            <div className="text-2xl font-extrabold tracking-tight"><Link to="/">HOSPITAL CLÍNICAS</Link></div>
+            <ul className="flex space-x-6 text-sm items-center">
+                <li><Link to="/" className="hover:text-hc-secundaria transition">Início</Link></li>
+                <li><Link to="/about" className="hover:text-hc-secundaria transition">Sobre</Link></li>
+                <li><Link to="/integrantes" className="hover:text-hc-secundaria transition">Equipe</Link></li>
+                <li><Link to="/agendamento" className="hover:text-hc-secundaria transition">Agendamento</Link></li>
+                <li><Link to="/fale-conosco" className="hover:text-hc-secundaria transition">Contato</Link></li>
+                <li><Link to="/acesso-paciente" className="bg-hc-secundaria text-hc-principal font-semibold px-4 py-2 rounded-lg">Acesso Paciente</Link></li>
+            </ul>
+        </nav>
+    </header>
 );
 
-const AboutHC: React.FC = () => {
-  return (
-    // Fundo limpo (hc-fundo) com padding responsivo (p-4 no mobile, p-10 no desktop)
-    <div className="min-h-screen bg-hc-fundo p-4 md:p-10">
-      <div className="container mx-auto max-w-6xl">
+const FooterHC: React.FC = () => (
+    <footer className="bg-hc-principal text-white pt-10 pb-6">
+        <div className="container mx-auto px-4"><div className="text-center text-xs text-gray-400">
+            &copy; {new Date().getFullYear()} Hospital das Clínicas. Projeto de Componentização React.
+        </div></div>
+    </footer>
+);
+
+// --- CÓDIGO DA PÁGINA ---
+
+const AboutHC: React.FC = () => (
+    <div className="min-h-screen bg-hc-fundo flex flex-col">
+        <HeaderHC />
         
-        {/* Seção Principal / Título */}
-        <header className="text-center mb-12 bg-white p-8 rounded-xl shadow-md">
-          {/* Título com a cor primária (Azul Royal) */}
-          <h1 className="text-4xl lg:text-5xl font-extrabold text-hc-principal mb-4">
-            Sobre o Hospital das Clínicas
-          </h1>
-          {/* Subtítulo mais claro e fácil de ler */}
-          <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
-            Uma instituição centenária que une excelência em saúde, pesquisa e ensino para o benefício da população.
-          </p>
-        </header>
-
-        {/* Seção de Conteúdo */}
-        <section className="bg-white p-8 rounded-xl shadow-lg mb-12">
-            <h2 className="text-3xl font-bold text-hc-principal mb-6 border-b-2 border-hc-secundaria pb-2">
-                Nossa História e Impacto
-            </h2>
-            <p className="text-gray-700 text-lg leading-relaxed mb-6">
-                O Hospital das Clínicas (HC) é uma instituição ligada à Universidade de São Paulo (USP), 
-                fundada com a missão de integrar ensino, pesquisa e atendimento médico de alta qualidade. 
-                Localizado em São Paulo, o HC é reconhecido nacional e internacionalmente como um dos 
-                **maiores complexos hospitalares da América Latina**.
-            </p>
-            <p className="text-gray-700 text-lg leading-relaxed">
-                Com uma infraestrutura moderna e equipes altamente especializadas, o HC oferece serviços 
-                em mais de 40 especialidades. Nossa história é marcada por avanços médicos que beneficiam 
-                milhões de pacientes anualmente, com foco em cirurgias complexas, tratamentos inovadores 
-                e programas de saúde pública.
-            </p>
-        </section>
-
-        {/* Seção de Missão, Visão e Valores (Usando o componente modular) */}
-        <section className="mb-12">
-            <h2 className="text-3xl font-bold text-hc-principal mb-8 text-center">Pilares Institucionais</h2>
+        <main className="container mx-auto py-10 px-4 flex-grow max-w-5xl">
+            <h1 className="text-4xl font-bold text-hc-principal mb-6 border-b pb-2">Sobre o Hospital das Clínicas</h1>
             
-            {/* GRID RESPONSIVO: 1 coluna no mobile, 3 em telas maiores */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <DestaqueMissao 
-                    icone="🧠"
-                    titulo="Pesquisa"
-                    texto="Contribuir com a ciência e a inovação, gerando conhecimento para transformar a medicina no país."
-                />
-                <DestaqueMissao 
-                    icone="🎓"
-                    titulo="Ensino"
-                    texto="Formar a próxima geração de profissionais de saúde com o mais alto nível de excelência acadêmica."
-                />
-                <DestaqueMissao 
-                    icone="💙"
-                    titulo="Atendimento"
-                    texto="Oferecer um cuidado humanizado e de alta complexidade, focado na recuperação integral do paciente."
-                />
+            <div className="bg-white p-8 rounded-xl shadow-lg space-y-6 text-gray-700">
+                <p className="text-lg font-semibold text-hc-secundaria">
+                    Fundado em 1944, o Hospital das Clínicas é o maior complexo hospitalar da América Latina, dedicado à assistência de alta complexidade, ensino e pesquisa médica de ponta.
+                </p>
+                
+                <h2 className="text-2xl font-bold text-hc-principal mt-8">Nossa Missão</h2>
+                <p>
+                    Oferecer assistência médica de excelência, promover a formação de profissionais de saúde e gerar conhecimento científico, contribuindo para a melhoria contínua da saúde pública e privada no país.
+                </p>
+                
+                <h2 className="text-2xl font-bold text-hc-principal mt-8">Valores</h2>
+                <ul className="list-disc list-inside ml-4 space-y-2">
+                    <li>**Comprometimento:** Com a vida e a saúde do paciente.</li>
+                    <li>**Excelência:** Busca constante pela qualidade e inovação.</li>
+                    <li>**Ética:** Atuar com integridade e transparência em todas as ações.</li>
+                </ul>
+                
+                <p className="pt-4 text-center">
+                    <Link to="/integrantes" className="text-hc-secundaria font-semibold hover:underline">
+                        Conheça nossa equipe de desenvolvedores.
+                    </Link>
+                </p>
             </div>
-        </section>
+        </main>
         
-      </div>
+        <FooterHC />
     </div>
-  );
-};
+);
 
 export default AboutHC;
